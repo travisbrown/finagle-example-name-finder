@@ -100,9 +100,21 @@ object NameRecognizer extends ModelLoader(new File("models")) {
       }
     }
   } rescue {
-    case ex: Throwable => Throw(
-      NameRecognizerException(s"Unable to load models for language $lang")
-    )
+    case ex: Throwable =>
+      List(
+        sentenceDetectorFile,
+        tokenizerFile,
+        personalNameFile,
+        locationNameFile,
+        organizationNameFile
+      ) foreach { file =>
+        println(file.toString + " " + file.length().toString)
+      }
+
+      ex.printStackTrace()
+      Throw(
+        NameRecognizerException(s"Unable to load models for language $lang: ${ex.getMessage}")
+      )
   }
 
   /**

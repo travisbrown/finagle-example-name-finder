@@ -2,4 +2,4 @@ nguage: scala
 scala:
   - 2.10.4
   - 2.11.2
-script: ./download-models.sh && ./sbt test
+script: ./download-models.sh && cat models/en-ner-location.bin
