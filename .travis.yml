@@ -1,10 +1,19 @@
+sudo: false
+
 language: scala
 
 scala:
-  - 2.10.4
+ - 2.10.4
+ - 2.11.5
+
+jdk:
+ - openjdk7
+ - oraclejdk7
+ - oraclejdk8
 
 before_script:
-  # default $SBT_OPTS is irrelevant to sbt lancher
-  - unset SBT_OPTS
+ # default $SBT_OPTS is irrelevant to sbt lancher
+ - unset SBT_OPTS
 
-script: ./download-models.sh && ./sbt test
+script: ./download-models.sh && ./sbt ++$TRAVIS_SCALA_VERSION test
+
